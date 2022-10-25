@@ -12,11 +12,12 @@ namespace merge_arrays
         {
             string[] array1 = new string[] {"1", "2", "1"};
             string[] array2 = new string[] { "3", "2" };
-            List<string> result = RemoveDuplicates(array1, array2);
+            List<string> result = new List<string>();
 
-            RemoveDuplicates(result);
+            AddArrayToList(array1, result);
+            AddArrayToList(array2, result);
 
-            foreach(var element in result)
+            foreach (var element in result)
             {
                 Console.WriteLine(element);
             }
@@ -24,36 +25,17 @@ namespace merge_arrays
             Console.ReadKey();
         }
 
-        static List<string> RemoveDuplicates(List<string> list)
+        static void AddArrayToList(string[] array, List<string> list)
         {
-            for (int i = 0; i < list.Count - 1; i++)
+            for(int i = 0; i < array.Length; i++)
             {
-                for(int j = list.Count - 1; j > i; j--)
+                bool isMeet = list.Contains(array[i]);
+
+                if(isMeet == false)
                 {
-                    if (list[j] == list[i])
-                    {
-                        list.RemoveAt(j);
-                    }
+                    list.Add(array[i]);
                 }
             }
-
-            return list;
-        }
-
-        static List<string> RemoveDuplicates(string[] array1, string[] array2)
-        {
-            List<string> list1 = array1.ToList();
-            List<string> list2 = array2.ToList();
-
-            for(int i = 0; i < list2.Count; i++)
-            {
-                if (list1.IndexOf(list2[i]) == -1)
-                {
-                    list1.Add(list2[i]);
-                }
-            }
-
-            return list1;
         }
     }
 }
